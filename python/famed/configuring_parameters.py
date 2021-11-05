@@ -41,6 +41,14 @@ class ConfiguringParameters(object):
         # Setup path to configuring parameters
         paths = params['PATHS']
 
+        # if no DIAMONDS root directory specified, use location of current file
+        if paths['diamonds_root'] is None:
+            diamonds_root = famed_path.parents[2]
+
+
+        if not os.path.isabs(paths['configuring_parameters_file'][0]):
+            paths['configuring_parameters_file'] = str(diamonds_root/paths['configuring_parameters_file'])
+
         # Read in configuring parameters from a fixed filename
         self.configuring_parameters_file = paths['configuring_parameters_file']
         with open(self.configuring_parameters_file) as f:
@@ -55,9 +63,10 @@ class ConfiguringParameters(object):
                     d[k] = float(v)
                 except:
                     pass
+            if isinstance(d[k], str):
+                d[k] = d[k].replace('YOUR_LOCAL_ROOT_PATH_HERE', str(diamonds_root))
             setattr(self, k, d[k])
-        
-       
+
         # Set up plotting parameters
         plotting = params['PLOTTING']
         self.plot_mode = plotting['plot_mode']
@@ -82,6 +91,4 @@ class ConfiguringParameters(object):
         self.dp_slid = dict()
         for key in diamonds['slid']:
             self.dp_slid[key] = diamonds['slid'][key]
-
-            
 
