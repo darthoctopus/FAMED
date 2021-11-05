@@ -3,7 +3,7 @@
 # FILE PATHS
 PATHS:
     diamonds_root: null
-    configuring_parameters_file: 'FAMED/python/famed/famed_configuring_parameters.txt'
+    configuring_parameters_file: 'YOUR_LOCAL_ROOT_PATH_HERE/FAMED/python/famed/famed_configuring_parameters.txt'
 
 # PLOTTING CONFIGURATION
 PLOTTING:

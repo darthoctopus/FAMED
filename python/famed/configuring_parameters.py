@@ -45,9 +45,7 @@ class ConfiguringParameters(object):
         if paths['diamonds_root'] is None:
             diamonds_root = famed_path.parents[2]
 
-
-        if not os.path.isabs(paths['configuring_parameters_file'][0]):
-            paths['configuring_parameters_file'] = str(diamonds_root/paths['configuring_parameters_file'])
+        paths['configuring_parameters_file'] = paths['configuring_parameters_file'].replace('YOUR_LOCAL_ROOT_PATH_HERE', str(diamonds_root))
 
         # Read in configuring parameters from a fixed filename
         self.configuring_parameters_file = paths['configuring_parameters_file']
